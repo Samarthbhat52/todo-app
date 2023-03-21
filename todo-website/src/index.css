@@ -1,69 +1,314 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+/* -----Font family import ------ */
+
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
+
+/* -----Reset----- */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
   line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
 }
-a:hover {
-  color: #535bf2;
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
 }
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  border: none;
+  background: transparent;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ----Root Variables----*/
+
+:root {
+  /* active colour */
+  --clr-primary-100: hsl(220, 98%, 61%);
+  --clr-btn-bg: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+
+  /* light mode colours */
+  --clr-neutral-light-100: hsl(0, 0%, 98%);
+  --clr-neutral-light-200: hsl(236, 33%, 92%);
+  --clr-neutral-light-300: hsl(233, 11%, 84%);
+  --clr-neutral-light-400: hsl(236, 9%, 61%);
+  --clr-neutral-light-500: hsl(235, 19%, 35%);
+
+  /* dark mode colours */
+  --clr-neutral-dark-100: hsl(234, 39%, 85%);
+  --clr-neutral-dark-200: hsl(234, 11%, 52%);
+  --clr-neutral-dark-300: hsl(233, 14%, 35%);
+  --clr-neutral-dark-400: hsl(237, 14%, 26%);
+  --clr-neutral-dark-500: hsl(235, 24%, 19%);
+  --clr-neutral-dark-600: hsl(235, 21%, 11%);
+
+  /* accent */
+  --clr-accent-dark-700: hsl(236, 33%, 92%);
+
+  /* font family */
+  --ff-main: "Josefin Sans", sans-serif;
+
+  /* font weight */
+  --fw-400: 400;
+  --fw-700: 700;
+}
+
+/* ----Utility Classes---- */
+
+.visually-hidden:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.flex {
+  display: flex;
+  gap: var(--gap, 1rem);
+}
+
+.grid {
+  display: grid;
+  gap: var(--gap, 1rem);
+}
+
+.flow > :where(:not(:first-child)) {
+  margin-top: var(--flow-space, 1rem);
+}
+
+.container {
+  padding-inline: 2rem;
+  margin-inline: auto;
+  max-width: 80rem;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.bg-dark {
+  background-color: var(--clr-neutral-dark-600);
+}
+.bg-light {
+  background-color: var(--clr-neutral-light-100);
+}
+
+.bg-list-dark {
+  background-color: var(--clr-neutral-dark-500);
+}
+.bg-list-light {
+  background-color: var(--clr-neutral-light-200);
+}
+
+.text-light {
+  color: var(--clr-neutral-light-100);
+}
+.text-list {
+  color: var(--clr-neutral-light-300);
+}
+.text-grey {
+  color: var(--clr-neutral-light-400);
+}
+.text-accent {
+  color: var(--clr-primary-100);
+}
+.text-dark {
+  color: var(--clr-neutral-dark-600);
+}
+
+.fw-400 {
+  font-weight: var(--fw-400);
+}
+.fw-700 {
+  font-weight: var(--fw-700);
+}
+
+.ff-main {
+  font-family: var(--ff-main);
+}
+
+/* -----main content styling----- */
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  background-image: url(../todo-app-main/images/bg-mobile-dark.jpg);
+  height: 100vh;
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+@media (min-width: 45em) {
+  body {
+    background-image: url(../todo-app-main/images/bg-desktop-dark.jpg);
+  }
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.container {
+  margin-top: clamp(2rem, 40%, 5rem);
+  max-width: 700px;
+}
+
+/* -----Title and toggle----- */
+
+.header {
+  justify-content: space-between;
+  letter-spacing: 10px;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* -----Text field----- */
+
+.input {
+  /* when there is one or more todo items */
+  align-items: center;
+  padding: 1rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+.input--more {
+  /* parent div */
+  align-items: center;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.enter {
+  /* input field */
+  background: transparent;
+  width: 100%;
+}
+
+/* ----Check button and Form enter button ---- */
+
+.btn {
+  height: 25px;
+  aspect-ratio: 1;
+  border: 1px solid var(--clr-neutral-dark-300);
+  border-radius: 100vmax;
+}
+
+.btn--click {
+  text-decoration: line-through;
+  color: hsl(233, 14%, 35%);
+}
+
+/* ----To-Do items div---- */
+
+.checkbox {
+  /* parent div */
+  align-items: center;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  gap: 0;
+}
+
+.checkmark:hover {
+  border: 2px solid var(--clr-primary-100);
+}
+
+.checkmark--click {
+  background-image: url(../todo-app-main/images/icon-check.svg),
+    linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.checkbox--container {
+  /* each list component */
+  width: 100%;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 0.2px solid var(--clr-neutral-dark-400);
+}
+
+.checkbox .checkbox--container:last-child {
+  border-bottom: none;
+  align-content: center;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.del-icon {
+  display: none;
+  margin-left: auto;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.checkbox--container:hover > .del-icon {
+  display: inline;
+}
+
+/* ----Footer---- */
+
+.footer {
+  justify-content: space-between;
+}
+
+.status-toggle {
+  justify-content: space-between;
+  gap: 2rem;
 }
