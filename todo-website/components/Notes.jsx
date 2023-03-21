@@ -14,7 +14,7 @@ export default function Notes({
         id={id}
         onClick={handleCheckboxChange}
       ></div>
-      <p className={isChanged ? "btn--click" : "pseudo"}>{body}</p>
+      <p className={isChanged ? "btn--click | todo-content" : "pseudo | todo-content"}>{body}</p>
       <img
         className="del-icon"
         src="../todo-app-main/images/icon-cross.svg"
