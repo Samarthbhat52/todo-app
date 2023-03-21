@@ -111,6 +111,12 @@ export default function App() {
           <p>Clear Completed</p>
         </div>
       </div>
+
+      <div className="status-toggle-mobile | text-list flex bg-list-dark text-grey">
+        <p>All</p>
+        <p>Active</p>
+        <p>Completed</p>
+      </div>
     </div>
   );
 }

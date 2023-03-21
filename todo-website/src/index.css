@@ -201,12 +201,6 @@ body {
   background-size: contain;
 }
 
-@media (min-width: 45em) {
-  body {
-    background-image: url(../todo-app-main/images/bg-desktop-dark.jpg);
-  }
-}
-
 .container {
   margin-top: clamp(2rem, 40%, 5rem);
   max-width: 700px;
@@ -308,7 +302,30 @@ body {
   justify-content: space-between;
 }
 
-.status-toggle {
+.status-toggle{
   justify-content: space-between;
   gap: 2rem;
+  display: none;
+}
+
+.status-toggle-mobile {
+  margin-top: 1rem;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: .5rem;
+}
+
+
+@media (min-width: 45em) {
+  body {
+    background-image: url(../todo-app-main/images/bg-desktop-dark.jpg);
+  }
+
+  .status-toggle{
+    display: flex;
+  }
+
+  .status-toggle-mobile{
+    display: none;
+  }
 }
