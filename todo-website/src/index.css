@@ -48,6 +48,11 @@ a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
 /* Make images easier to work with */
 img,
 picture {
@@ -62,6 +67,8 @@ textarea,
 select {
   font: inherit;
   border: none;
+  color: inherit;
+  cursor: pointer;
   background: transparent;
 }
 
@@ -248,7 +255,7 @@ body {
 
 .btn--click {
   text-decoration: line-through;
-  color: hsl(233, 14%, 35%);
+  color: var( --clr-neutral-dark-300);
 }
 
 /* ----To-Do items div---- */
@@ -315,6 +322,18 @@ body {
   border-radius: .5rem;
 }
 
+.active-page{
+  color: var(--clr-primary-100);
+}
+
+
+.clearComp:hover{
+  color: var(--clr-primary-100);
+}
+
+.clearComp:active{
+  color: var(--clr-neutral-dark-200);
+}
 
 @media (min-width: 45em) {
   body {

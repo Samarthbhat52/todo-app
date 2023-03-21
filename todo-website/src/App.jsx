@@ -3,18 +3,25 @@ import { nanoid } from "nanoid";
 import Notes from "../components/Notes";
 
 export default function App() {
+
+  // Variable and state declarations
+
   const defaultValues = {
     isChanged: false,
     id: getRandomId(),
     body: "",
+    page: "all",
   };
 
   const [formData, setFormData] = useState(defaultValues);
   const [newNote, setNewNote] = useState([]);
+  const [pageVal, setPageVal] = useState("all");
 
   function getRandomId() {
     return nanoid();
   }
+
+  // Functions to handle the different tasks
 
   function handleForm(event) {
     const { name, value } = event.target;
@@ -39,7 +46,11 @@ export default function App() {
     setNewNote((prevState) => {
       return prevState.map((checkbox) => {
         if (checkbox.id === id) {
-          return { ...checkbox, isChanged: !checkbox.isChanged };
+          return {
+            ...checkbox,
+            isChanged: !checkbox.isChanged,
+            page: "completed",
+          };
         } else {
           return checkbox;
         }
@@ -52,10 +63,21 @@ export default function App() {
     setNewNote((oldNote) => oldNote.filter((note) => note.id !== noteId));
   }
 
+  function deleteCompleted(event){
+    event.stopPropagation();
+    setNewNote(oldNote => oldNote.filter(note => note.page !== "completed"))
+  }
+
   function notesCount() {
     const notesCount = newNote.filter((item) => item.isChanged === false);
     return notesCount.length;
   }
+
+  function handlePages(value) {
+    setPageVal(value);
+  }
+
+// HTML Component
 
   return (
     <div>
@@ -90,32 +112,107 @@ export default function App() {
       </div>
 
       <div className="checkbox | text-list flex bg-list-dark">
-        {newNote.map((checkbox) => (
-          <Notes
-            key={checkbox.id}
-            id={checkbox.id}
-            isChanged={checkbox.isChanged}
-            body={checkbox.body}
-            handleCheckboxChange={() => handleCheckboxChange(checkbox.id)}
-            deleteNote={deleteNote}
-          />
-        ))}
+        {pageVal === "all" &&
+          newNote.map((checkbox) => (
+            <Notes
+              key={checkbox.id}
+              id={checkbox.id}
+              isChanged={checkbox.isChanged}
+              body={checkbox.body}
+              handleCheckboxChange={() => handleCheckboxChange(checkbox.id)}
+              deleteNote={deleteNote}
+            />
+          ))}
+
+        {pageVal === "active" &&
+          newNote.map(
+            (checkbox) =>
+              checkbox.page === "all" && (
+                <Notes
+                  key={checkbox.id}
+                  id={checkbox.id}
+                  isChanged={checkbox.isChanged}
+                  body={checkbox.body}
+                  handleCheckboxChange={() => handleCheckboxChange(checkbox.id)}
+                  deleteNote={deleteNote}
+                />
+              )
+          )}
+
+        {pageVal === "completed" &&
+          newNote.map(
+            (checkbox) =>
+              checkbox.page === "completed" && (
+                <Notes
+                  key={checkbox.id}
+                  id={checkbox.id}
+                  isChanged={checkbox.isChanged}
+                  body={checkbox.body}
+                  handleCheckboxChange={() => handleCheckboxChange(checkbox.id)}
+                  deleteNote={deleteNote}
+                />
+              )
+          )}
 
         <div className="checkbox--container footer | flex text-grey bg-list-dark">
           <p>{`${notesCount()} items left`}</p>
           <div className="status-toggle | flex">
-            <p>All</p>
-            <p>Active</p>
-            <p>Completed</p>
+            <p>
+              <button
+                className={pageVal === "all" ? "active-page" : "pseudo"}
+                onClick={() => handlePages("all")}
+              >
+                All
+              </button>
+            </p>
+            <p>
+              <button
+                className={pageVal === "active" ? "active-page" : "pseudo"}
+                onClick={() => handlePages("active")}
+              >
+                Active
+              </button>
+            </p>
+            <p>
+              <button
+                className={pageVal === "completed" ? "active-page" : "pseudo"}
+                onClick={() => handlePages("completed")}
+              >
+                Completed
+              </button>
+            </p>
           </div>
-          <p>Clear Completed</p>
+          <p>
+            <button className="clearComp" onClick={deleteCompleted}>Clear Completed</button>
+          </p>
         </div>
       </div>
 
       <div className="status-toggle-mobile | text-list flex bg-list-dark text-grey">
-        <p>All</p>
-        <p>Active</p>
-        <p>Completed</p>
+        <p>
+          <button
+            className={pageVal === "all" ? "active-page" : "pseudo"}
+            onClick={() => handlePages("all")}
+          >
+            All
+          </button>
+        </p>
+        <p>
+          <button
+            className={pageVal === "active" ? "active-page" : "pseudo"}
+            onClick={() => handlePages("active")}
+          >
+            Active
+          </button>
+        </p>
+        <p>
+          <button
+            className={pageVal === "completed" ? "active-page" : "pseudo"}
+            onClick={() => handlePages("completed")}
+          >
+            Completed
+          </button>
+        </p>
       </div>
     </div>
   );
