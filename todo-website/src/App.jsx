@@ -73,9 +73,11 @@ export default function App() {
   function deleteCompleted(event) {
     event.stopPropagation();
     setNewNote((oldNote) =>
-      oldNote.filter((note) => note.page !== "completed")
+      oldNote.filter((note) => note.isChanged !== true)
     );
   }
+
+  console.log(newNote)
 
   function notesCount() {
     const notesCount = newNote.filter((item) => item.isChanged === false);
