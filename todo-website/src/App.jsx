@@ -12,6 +12,7 @@ export default function App() {
     isChanged: false,
     id: getRandomId(),
     body: "",
+    completed: false,
     page: "all",
   };
 
@@ -56,7 +57,7 @@ export default function App() {
           return {
             ...checkbox,
             isChanged: !checkbox.isChanged,
-            page: "completed",
+            completed: !checkbox.completed,
           };
         } else {
           return checkbox;
@@ -154,7 +155,7 @@ export default function App() {
           {pageVal === "active" &&
             newNote.map(
               (checkbox) =>
-                checkbox.page === "all" && (
+                checkbox.completed !== true && (
                   <Notes
                     key={checkbox.id}
                     id={checkbox.id}
@@ -171,7 +172,7 @@ export default function App() {
           {pageVal === "completed" &&
             newNote.map(
               (checkbox) =>
-                checkbox.page === "completed" && (
+                checkbox.completed && (
                   <Notes
                     key={checkbox.id}
                     id={checkbox.id}
