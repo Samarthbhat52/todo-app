@@ -17,7 +17,7 @@ export default function Notes({
       <p className={isChanged ? "btn--click | todo-content" : "pseudo | todo-content"}>{body}</p>
       <img
         className="del-icon"
-        src="../todo-app-main/images/icon-cross.svg"
+        src="../assets/icon-cross.svg"
         onClick={(event) => deleteNote(event, id)}
       />
     </div>

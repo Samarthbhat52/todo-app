@@ -98,7 +98,7 @@ export default function App() {
   // HTML Component
 
   return (
-    <ThemeContext.Provider value={{theme}}>
+    <ThemeContext.Provider value={{ theme }}>
       <div id={theme}>
         <div className="header | flex">
           <h1 className="text-light fw-700">TODO</h1>
@@ -107,8 +107,8 @@ export default function App() {
               onClick={themeToggle}
               src={
                 theme === "dark"
-                  ? "../todo-app-main/images/icon-sun.svg"
-                  : "../todo-app-main/images/icon-moon.svg"
+                  ? "../assets/icon-sun.svg"
+                  : "../assets/icon-moon.svg"
               }
               alt="Light/dark-mode-icon"
             />
