@@ -78,8 +78,6 @@ export default function App() {
     );
   }
 
-  console.log(newNote)
-
   function notesCount() {
     const notesCount = newNote.filter((item) => item.isChanged === false);
     return notesCount.length;
@@ -97,8 +95,6 @@ export default function App() {
     document.body.classList.remove("bg-dark");
   }
 
-  console.log(theme)
-
   // HTML Component
 
   return (
@@ -114,7 +110,7 @@ export default function App() {
                   ? "../todo-app-main/images/icon-sun.svg"
                   : "../todo-app-main/images/icon-moon.svg"
               }
-              alt="Light-mode-icon"
+              alt="Light/dark-mode-icon"
             />
           </div>
         </div>
